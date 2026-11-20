@@ -21,11 +21,13 @@ import { requestTracing } from "./middleware/requestTracing";
 import { apiKeyAuth } from "./middleware/apiKeyAuth";
 import { rateLimit } from "./middleware/rateLimit";
 import { jsonBodyParser } from "./middleware/jsonBodyParser";
+import { metricsMiddleware, metricsHandler } from "./middleware/metrics";
 import healthRoutes from "./routes/health";
 import proposalRoutes from "./routes/proposals";
 import leaderboardRoutes from "./routes/leaderboard";
 import apiKeysRoutes from "./routes/apiKeys";
 import adminAuditLogRoutes from "./routes/adminAuditLog";
+import cspReportRoutes from "./routes/cspReport";
 import {
   notFoundHandler,
   globalErrorHandler,
