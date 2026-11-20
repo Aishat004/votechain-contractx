@@ -177,7 +177,7 @@ function cacheMiddleware(keyFn: (req: Request) => string, ttl: number) {
   return async (req: Request, res: Response, next: NextFunction) => {
     // Bypass cache entirely when Redis is unavailable (#38)
     if (!isRedisReady() || !redis) {
-      res.setHeader("X-Cache", "MISS");
+      res.setHeader("X-Cache", "BYPASS");
       return next();
     }
 
@@ -193,7 +193,7 @@ function cacheMiddleware(keyFn: (req: Request) => string, ttl: number) {
     } catch (err) {
       log("error", "redis get error", { error: String(err) });
       // Fall through on error — degrade gracefully
-      res.setHeader("X-Cache", "MISS");
+      res.setHeader("X-Cache", "BYPASS");
       return next();
     }
 
