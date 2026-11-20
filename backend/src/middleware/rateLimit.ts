@@ -131,6 +131,7 @@ export async function rateLimit(
     res.setHeader("X-RateLimit-Remaining", remaining);
 
     if (count > maximum) {
+      res.setHeader("Retry-After", WINDOW_SECONDS);
       res.status(429).json({
         error: {
           code: "RATE_LIMITED",
