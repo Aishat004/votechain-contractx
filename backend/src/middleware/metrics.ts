@@ -112,5 +112,7 @@ export function metricsMiddleware(req: Request, res: Response, next: NextFunctio
  */
 export async function metricsHandler(_req: Request, res: Response) {
   res.setHeader("Content-Type", registry.contentType);
+  res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
+  res.setHeader("Pragma", "no-cache");
   res.end(await registry.metrics());
 }
